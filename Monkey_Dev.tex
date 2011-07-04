@@ -1,0 +1,304 @@
+% Primate Brain Development paper - Yundi Shi
+% --------------------------------------------------------------------------
+\documentclass[authoryear,11pt]{elsarticle}
+
+\usepackage{makeidx,graphicx,url,times,epsfig,amsmath,amssymb,verbatim}  
+
+\usepackage[inline,nomargin,draft]{fixme}
+
+\usepackage{subfigure}
+%\usepackage[colorlinks,linkcolor={blue},citepcolor={blue},urlcolor={blue}]{hyperref}
+\usepackage{epstopdf}
+\usepackage{multirow}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\graphicspath{{./Monkey_Dev_Figure/}}
+
+\begin{document}
+
+% Title.
+% ------
+\title{Diffusion Tensor Imaging Based Characterization of Neurodevelopment in Primates}
+
+%Authors
+%------
+\author[unc]{Yundi Shi}
+\author[unc]{Sarah Short}
+\author[unc]{Rebecca Knickmeyer}
+\author[uncbio]{Jiaping Wang}
+\author[wisc]{Christopher Coe}
+\author[unc]{John Gilmore}
+\author[uncbio]{Hongtu Zhu}
+\author[unc,unccs]{Martin Styner}
+
+\address[unc]{Department of Psychiatry, University of North Carolina, Chapel Hill}
+\address[wisc]{Department of Psychology, Harlow Center, University of Wisconsin, Madison}
+\address[uncbio]{Department of Biostatistics, University of North Carolina, Chapel Hill}
+\address[unccs]{Department of Computer Science, University of North Carolina, Chapel Hill}
+
+%Abstract
+%------
+\begin{abstract}
+
+Primate neuroimaging provides a critical model for understanding neurodevelopment.  Yet the lack of normative description of brain development in primates has limited the direct comparison to changes in human. This paper presents for the first time a cross-sectional diffusion tensor imaging (DTI) study characterizing primate neurodevelopment ranging from 1 to 5 years of age (mid childhood to early adulthood).  Twenty-five healthy non-handled rhesus monkeys (14 Male, 11 Female) were included in this study.  A comprehensive analysis based on three different approaches was performed using the same atlas-based framework: region-of-interest (ROI), voxel-wise, and fiber tract based analysis.  
+
+Results demonstrated significant changes of DTI properties, i.e. fractional anisotropy (FA), mean diffusivity (MD), axial diffusivity (AD), and radial diffusivity (RD), in a heterogeneous pattern across different regions as well as along fiber tracts.  Overall, we observed the expected substantial increase in FA and AD and decrease in RD for white matter (WM).  Regions showing the most increase in FA are corpus collosum (CC), cingulate (CG) and pons and medulla (PM).  Furthermore, CC and CG showed the most decrease in RD while PM showed the most increase in AD.  Changes in MD were irregular.  Most of the regions showed a decrease as expected, although PM, temporal limbic region, the cerebellar right hemisphere and the occipital region showed a surprising increase in MD.  We also discovered similar changes in gray matter (GM): increase in FA and AD; decrease in RD, all at a much smaller scale compared to WM.  We observed an overall posterior-to-anterior trend in DTI property changes over time as well as asymmetry between the left and right hemispheres albeit being very similar.  Novel findings further include strong correlations between the development of WM and GM, as shown in FA, MD and RD change.  All of these findings are consistent across the three adopted analysis methods.  These characterized DTI changes strongly indicated underlying biological development, including myelination, axonal density changes, fiber tract re-organization and synaptic pruning processes.
+
+\end{abstract}
+
+%
+\section{Keywords}
+brain development; diffusion tensor imaging; atlas; tractography
+%
+%
+\section{Abbreviation}
+DTI = diffusion tensor imaging; FA = fractional anisotropy; MD = mean diffusivity; AD = axial diffusivity; RD = radial diffusivity; WM = white matter; GM = gray matter; ROI = region of interest; GLM = general linear model; EM = expectation maximum; CSF = cerebro-spinal fluid
+%
+
+\maketitle
+%
+
+\section{Introduction}
+\label{sec:intro}
+
+Our current understanding of neurodevelopment is limited with respect to trajectories of white matter (WM) maturity. DTI enables characterization of WM properties and
+maturation of brain structures and the fiber tracts that connect them. The current study represents the first analyses of WM development spanning 1-5 years of age in
+a nonhuman primate speciesﬁ and explored the potential use of DTI in GM study.  This developmental window reflects one of the most formative and poorly characterized periods of neural maturation in both humans and nonhuman primates. Using three complimentary analysis approaches, the current study sought to discern patterns of neurodevelopment that are specific to WM in the typically maturing primate brain. A detailed understanding of normal neural development will provide the essential framework to allow further insights into the pathology of neurodevelopmental disorders.
+
+Brain maturation is a complex process driven by myelination, growth of neurons and of their connections during the first years of life. The increase in brain connections is
+followed by a process of dentritic pruning and loss of synaptic contacts, presumably aiming at a more efficient network of connections that are continuously remodeled
+throughout life (citep{Engert_Nature_1999} Stepanyants, 2002; Lebel, 2008; Dawson, 1994). Although brain maturation has been studied extensively, both at a high
+level (behavior) and a low level (cellular physiology), information at the level of neuro-anatomical connectivity and about maturational changes during the peripubertal years
+are sparse. However, this information is of special interest, since it provides insight into the anatomical substrates and the timing of brain function development. Further,
+understanding developmental brain changes will ultimately facilitate diagnoses and the development of targeted therapies for neurodevelopmental and psychiatric brain
+disorders. 
+
+Nonhuman primate models are widely used to provide comparative information associated with human neuropathology (Lubach, 2006; Segestorm, 2006; \citep{Bennett_DevPsych_2008} Grant, 2003; Lebherz, 2005; Williams, 2008; \citep{Barr_AddictionBiology_2006} Glatzel, 2002; Machado,
+2003; Sullivan, 2005). Among nonhuman primate models, the rhesus macaque (Macaca mulatta) has been the most widely used monkey to investigate the neural substrates of human behavior, due to its phylogenetic closeness to humans (Lacreuse, 2009) and the potential to examine more complex cognitive functions and social behavior \citep{Amaral_BioPsych_2002}. Rhesus macaques further show hemispheric asymmetry and sex difference in adolescence similar to humans. For more than 40 years, this species has been used to evaluate how disturbances of the early rearing environment can induce behavioral abnormalities (Harlow, 1971).
+
+Only a few DTI non-human primate studies exist.  In macaques, Makris et al. \citep{Makris:2007p2487} investigated changes in WM fiber bundles with aging. They reported reductions in FA in cortico-cortical association fibers with age and general agreement with observations in humans.  Out previous studies  \citep{styner_automatic_spie_2007,styner_automatic_spie_2008} explored changes in the developing macaque brain using an atlas-driven brain parcellation and showed increases in FA, particularly in the corpus callosum, as well as decreases in MD.  Combining structural MRI and DTI is particularly useful to investigate brain development over the full range of neurodevelopment.  While contrasts in WM are difficult to analyze with structural MRI at early stages of brain development, the integrity of WM can be characterized with DTI.  
+
+Rhesus macaques have long been used to investigate questions that are important to the human condition. The relevance of this animal model extends beyond biological similarities. Like humans, nonhuman primates have a protracted developmental trajectory that is characterized by complex social and emotional underpinnings. As such, characterization of normal brain development in the rhesus macaque is necessary to identify these similarities and differences between humans and the macaque and to better align the maturational changes associated with the critical transitional period of puberty.
+
+%There has been increasing focus on the non-human primates in neuroimaging, as pathological and environmental exposures can be performed and studied in well-controlled settings.  In our own studies, we are investigating the effect of various adverse exposure models on neurological brain development in rhesus monkeys, such as prenatal, maternal flu-infection during pregnancy \citep{Short_10_BioPsy}.  Measurements include both structural as well as DTI based measurements, which represents brain tissue connectivity properties.  DTI based studies of the monkey brains have been done using regional analysis \citep{DArceuil:2007p2516}, voxel based analysis \citep{Makris:2007p2487} and fiber tract analysis in fixed, ex-vivo \citep{Croxson:2005p1659} and in-vivo conditions \citep{Parker:2002p2921}.  
+
+This paper is built upon our previous work \citep{styner_automatic_spie_2007,styner_automatic_spie_2008,Short_10_BioPsy}, which established the framework to perform atlas building and atlas-based automatic brain analysis.  The results of three atlas-based DTI analysis approaches are presented with each analysis step having a different advantages and disadvantages. We start with a coarse scale regional analysis (similar to \cite{DArceuil:2007p2516}) that has high stability but lumps together different fiber tracts running through the same region. Then, a  fine-scale voxel-wise analysis \citep{Liu_09_ISBI,Makris:2007p2487} was performed that allows a very fine representation of the changes across time, but is susceptible to small registration errors as well as sensitive to noise. Finally, a fiber-tract based analysis \citep{zhu_10_TMI,Croxson:2005p1659,Parker:2002p2921} allows us to analyze DTI properties along the tract and provides us with an intermediate scale analysis as compared to the prior two steps. To our knowledge, this the first extensive DTI study of non-human primate neurodevelopment.
+
+%
+%
+\section{Materials and methods}
+\label{sec:methods}
+
+\subsection{Subjects}
+ 
+Twenty-five healthy non-handled rhesus monkeys (14 Male, 11 Female) between the ages of 319 days (approximately 1 year) and 2144 days (approximately 6 years) (Fig. \ref{table:Subj_Info}) were generated from a large (500+) monkey-breeding colony at the Harlow Primate Laboratory (University of Wisconsin, Madison, WI), with known pedigree and clinical history extending back 8 generations and over 50 years. The cohort of monkeys used for these MRI analyses were generated from 35 different adult females bred with 22 different adult males. All monkeys were reared and housed in standardized conditions. Infants were reared by the mother until 6-8 months of age, and then weaned into small social groups, each comprised of 4-8 animals. Subadult animals were housed in mixed-age groups or as social pairs with another animal of the same age and sex. Thus, all animals scanned for this project had been socially reared, maintained in a controlled manner, and should be free of experimental manipulations that would alter brain development.  Animals were fed a standardized diet of commercial biscuits (Teklad, Harlan Laboratories, Indianapolis, IN) and provided fruit supplements and foraging devices for enrichment. Water was available ad libitum, temperature controlled at $23^{\circ}C$, and the light:dark cycle maintained at 14:10 with lights on at 06:00 AM. The housing conditions and experimental procedures were approved by the Institutional Animal Care and Use Committee of the University of Wisconsin-Madison.
+
+ 
+\begin{table}[bt]
+\centering
+\begin{center}
+\begin{tabular}{  c || c | c }
+    Age Range &  number of Female   &  number of Male \\ 
+    300 - 900 days & 5 & 6\\ 
+    900 - 1500 days & 3 & 2\\
+    1500 - 2200 days & 6 & 3\\
+\end{tabular}
+\end{center}
+\caption{Age and gender information of the subjects.  Number of female and male subjects were list for a particular age range.  More subjects at younger ages were included as we suspected the brain changes more rapidly during this time.}
+\label{table:Subj_Info}
+\end{table}
+
+\begin{figure}[tb]
+\begin{minipage}[b]{0.96\linewidth}
+  \centering
+ \includegraphics[width=10.0cm]{pipeline.pdf}
+\end{minipage}
+\caption{Pipeline of the atlas-based study. (a) A structural atlas was constructed using T1 images and different lobar parcellations were defined on this atlas. (b) A corresponding DTI atlas was created with FA images co-registered to T1 images.  (c) ROI-based statistical analysis was performed for each lobar parcellation using a linear growth model.  FA curve in the corpus callosum is shown as an example.  Tract-based analysis was similar to ROI analysis (c) with the exception that statistical modeling of diffusion properties was done for each sampling point along the fiber instead of in each parcellation ROI.  (d) All the fiber tracts included in this study including the genu, the cingulum, the inferior longitudinal fasciculus, different subdivisions of the internal capsule and the splenium.  Fiber tracts were colored by the FA values at postnatal day (PND) 300.
+}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{MRI acquisition}
+All subjects were scanned on a GE Signa 3T scanner (General Electric Medical Systems, Milwaukee WI) at the Wisconsin Waisman Center.  T1-weighted images were acquired using a high resolution axial 3D-SPGR sequence (TR = 8.6 msec, TE = 2.0 msec, FOV = 14 cm, flip angle = $10^\circ$, matrix = 512 x 512, voxel size = 0.27 $mm^3$, slice thickness = 1 mm, slice gap = -0.5 mm, bandwidth = 15.63) with an effective voxel resolution of 0.27 x 0.27 x 0.5 $mm^3$.  Spin-echo sequence was performed to acquire T2-weighted images (TR = 12,000 msec, TE = 90 msec, FOV = 14 cm, flip angle = $90^{\circ}$, matrix = 512 x 512, voxel size = 0.27 $mm^3$, slice thickness = 1.5 mm, slice gap = 0 mm, bandwidth = 31.25).  Diffusion-weighted images (DWI) were acquired using an EPI sequence (0.55x0.55x2.5 $mm^3$) with 12 unique directions at b=1000 s/$mm^2$ and a single base image at b=0. The in-plane resolution was upsampled in K-space by a factor of two on the scanner.  Ketamine hydrochloride (10 mg/kg I.M.) followed by medatomidine (50 $\mu$g/kg I.M.) was used for immobilization during scanning.  All younger monkeys were oriented identically within a stereotaxic platform, the larger 4-5 yr old sub-adults were oriented in the same plane on a stabilizing pillow; all within a standard 18-cm-diameter quadrature extremity coil.  Similar orientation and the absence of marked head tilt or yaw were verified in the sagittal and coronal planes on the scanner.
+
+\subsection{Tensor estimation and diffusion properties computation}
+Diffusion-weighted images were up-interpolated to an isotropic 0.55$mm$ resolution using windowed sinc interpolation.  Diffusion tensors were computed using weighted least squares fitting \fxnote{REFERENCE NEEDED} via the NA-MIC DTIProcess software suite\footnote{www.nitrc.org/projects/dtiprocess}.  \fxnote{Skull-stripping was performed using XXXXX.} Eigenvalues ($\lambda_1 \geq \lambda_2 \geq \lambda_3$) and corresponding eigenvectors were calculated to obtain the diffusion properties, including FA, MD, AD and RD, where $FA = \sqrt{\frac{1}{2}}\sqrt{\frac{(\lambda_1-\lambda_2)^2+(\lambda_1-\lambda_3)^2+(\lambda_2-\lambda_3)^2}{{\lambda_1}^2+{\lambda_2}^2+{\lambda_3}^2}}$, $MD=\frac{1}{3}(\lambda_1+\lambda_2+\lambda_3)$, $AD = \lambda_{\|} = \lambda_1$ , and $RD = \lambda_{\bot} = \frac{1}{2}(\lambda_2+\lambda_3)$.  AD shows parallel diffusivity and increases with refined micro-organization and maturation, while RD measures perpendicular diffusivity and decreases with axonal myelination \citep{Zhang_JNeurosci_2009}.  MD represents the average total diffusion, while FA is a measure similar to the ratio between parallel and perpendicular diffusion.  Both refined organization (increase of AD) or a higher degree of myelination (decrease of RD) lead to higher values of FA.  These diffusion properties well characterize the local micro-organization in WM, but also possibly in GM areas.   
+
+\subsection{Regional ROI-based analysis}
+
+Regional analysis is currently the most common form of analysis in DTI studies. We perform a fully automatic regional analysis using co-registered tissue and lobar segmentations that were computed on corresponding structural MRIs. Median values of the diffusion properties in each parcellation region were computed for WM and GM tissues.  Changes over time were analyzed statistically to study the developmental pattern of FA, MD, AD and RD for each region and differences among these regions.  This method is a straightforward large scale analysis and allows the application of standard statistical methods. While this analysis step has the advantage of being stable and robust to noise and minor registration errors, it does not separate fiber tracts within the same region that potentially develop differently, such as the genu tract and uncinate fasciculus that both run in the prefrontal lobe.  
+
+\subsubsection{Brain tissue classification and lobar parcellation}
+In our earlier work \citep{styner_automatic_spie_2007}, we generated co-registered unbiased, structural T1 and T2 weighted atlases using training subjects in the age range of 16 to 34 months\footnote{\url{http://www.nitrc.org/projects/primate_atlas}}.  Probabilistic maps for WM, GM and  CSF were defined on the atlas alongside lobar parcellations and subcortical brain structures. Parcellations and structures were determined manually using the ITK-SNAP segmentation tool \citep{Yushkevich:2006lr} \footnote{\url{http://www.itksnap.org/download/snap/}}.  The full parcellation consists of the left and right hemisphere of the prefrontal, frontal, cingulate, corpus collosum, parietal, temporal auditory, temporal visual, temporal limbic, occipital lobes as well as the cerebellum, subcortical structure and brainstem. \citep{styner_automatic_spie_2007,styner_automatic_spie_2008} \footnote{See \url{https://www.ia.unc.edu/dev/tutorials} for details.}
+
+\subsubsection{Co-registered DTI property computation}
+T1 and T2 weighted images were registered to the FA image via normalized mutual information based b-spline registration \citep{Rueckert:1999p3032} in a two-step process\footnote{\url{http://www.doc.ic.ac.uk/~dr/software}} for each subject.  All images were skull-stripped prior to the registration process. As a first step, the T2 weighted image was registered to the b=0 image using a uniform 4$mm$ spacing of the b-spline control points.  This registration was then refined by matching the T1 weighted image with the FA image.  The full registration was then applied to both the probabilistic WM/GM segmentations and the parcellations maps.  The registered WM and GM maps were finally masked with all the parcellations.
+
+Next, the median of FA, MD, AD and RD were computed within each parcellations for every subject.  For the WM, bilateral parcellations included the left and right lobes of prefrontal(PF), frontal(FT), cingulate(CG), corpus callosum(CC), parietal(PT), temporal auditory(TA), temporal visual(TV), temporal limbic(TL), occipital (OC), cerebellum (CB) as well as the pons and medulla (PM).  Analysis of GM were performed on the same lobar parcellations although the insula (IL) was included in the GM analysis while WM regions such as the CC and PM were excluded.
+
+\subsubsection{Regional statistical analysis}
+As mentioned above, we employed the median values of the diffusion properties rather than the arithmetic mean as it is considered to be less sensitive to noise, registration and segmentation errors.  All statistical analyses for ROI-based data were performed using PROC Mixed in SAS 9.2 (SAS Institute Inc, Cary, NC).  A linear growth model was used to delineate the trajectory of changes for diffusion properties in each ROI using DTI data between 10 to 72 months.  Multiple diffusion properties at each ROI were simultaneously entered into the linear growth model as a multivariate outcome dependent vector.  The linear and quadratic terms of age were then included as fixed effects to model the mean trajectory of each diffusion property as a function of age.  An unstructured correlation structure was employed to model correlation among different diffusion properties.  F-test statistic was used to test the null hypothesis that both age and age square terms equal zeros for statistically examining the age effect. 
+
+\subsection{DTI atlas building for voxel-wise and fiber-tract based analysis}
+We computed a DTI atlas over all DTI datasets employed in this study in order to map all individual DTI data to a common coordinate system enabling tract-based and voxel-based analysis.  \fxnote{how many subjects were included in the DTI atlas? any monkeys excluded?} The same basic algorithm used for structural atlas computation was also used to build an unbiased atlas \citep{Joshi:2004fk} of FA yielding diffeomorphic field maps that map each individual subject to the atlas.  These field maps were then applied to each corresponding tensor image and finite-strain algorithm was adopted to reorient the tensors \citep{Alexander_01_TMI}.  The DTI atlas was finally computed as the average of all these warped tensor images \citep{Goodlett_09_NeuroImage}.
+
+\subsection{Voxel-wise analysis}
+Voxel-wise analysis measures the change of each voxel over time without assumptions of specific tract geometry or human interaction (i.e., ROI labeling or fiber tracking).  A multi-scale adaptive model (MARM) based on generalized estimation equations was developed to spatially and adaptively analyze imaging measures across all voxels \citep{Zhu_InfoMedPro_09}.  Common, existing voxel-wise approaches often treat all voxels as independent units, and employ local smoothing operations for spatial coherence.  We developed a multi-scale adaptive model to avoid such deficits by accounting for the spatial correlation as well as preserving tissue boundaries because the initial smoothing step often dramatically increases the numbers of false positives and false negatives.  Specifically,  at each voxel, we fit a linear regression model with each diffusion property as a outcome dependent variable, as well as gender and the linear and quadratic terms of age as fixed effects. Sequentially, our  multiscale adaptive estimation and testing procedure were used to incorporate the neighboring information from each voxel to adaptively calculate parameter estimates and test statistics. Finally, False Discovery Rate (FDR) correction \citep{Genovese_NeuroImage_2002} was used to correct for multiple comparisons.   It is an excellent way for localized hypothesis generating and provides detailed information complementary to ROI-based and tract-based analysis. 
+
+
+\begin{figure}[b!]
+\begin{minipage}[b]{0.96\linewidth}
+  \centering
+ \includegraphics[width=13.0cm]{ROI_Yearly_WM.pdf}
+\end{minipage}
+\begin{minipage}[b]{0.98\linewidth}
+  \centering
+ \includegraphics[width=13.0cm]{ROI_Yearly_GM.pdf}
+\end{minipage}\caption{Estimation of FA, MD, AD and RD using ROI-based GLM at age 300, 900 and 1500 days (approximately 1, 3 and 5 years old) for WM and GM respectively.  Visualization was chosen to show the cortical regions of the left hemisphere. Detailed results for all regions are shown in Fig. \ref{fig:ROIWM} and  Fig. \ref{fig:ROIGM}.}
+\label{fig:YearlyFAMDADRD}
+\end{figure}
+
+\subsection{Fiber-tract based analysis}
+The study of atlas based DTI properties as a function of arc length along a DTI streamline fiber tract is becoming an important source of information for studying neurodevelopment \citep{Corouge_MICCAI_2006,Fletcher_IPMI_2007,Ding_MRM_2003} \fxnote{WHICH PAPER? add reference to Gilmore/Gerig papers}. In our work, we performed fiber tracking in the DTI atlas space with Slicer3 \footnote{\url{http://www.slicer.org}}.  ROI seeding voxels were manually determined and a standard streamline algorithm was used to obtain the major fiber tracts, including the genu, the cingulum, the inferior longitudinal fasciculus, different subdivisions of the internal capsule and the splenium.  These fibers were then sampled with arclength of 0.5mm in the atlas.  Diffusion properties, including FA, MD, AD and RD, were computed at these sampling points for each subject that has been warped into the atlas space in the atlas building step.  The median was calculated at corresponding sampling points across the fiber bundles yielding a single profile along the tract for each fiber bundle \citep{Goodlett_09_NeuroImage}.  Previous studies have shown that median is more robust to noise and variability in fiber tracking as compared to the arithmetic mean. 
+ 
+\subsubsection{Fiber-tract based statistical analysis}
+The FRATS fiber tract analysis framework \citep{zhu_10_TMI} was applied to compute the change of FA, MD, AD and RD along each fiber tract across time.  FRATS first employed a local polynomial kernel method for jointly smoothing multiple diffusion properties along individual fiber bundles. Then a functional linear regression model was used for characterizing the association between fiber bundle diffusion properties and the three covariates: gender, linear and quadratic age terms.  Local and global test statistics were additionally estimated to test for age effects.
+
+
+\section{Results}
+\label{sec:results}
+\subsection{ROI}
+
+
+In general, significant changes in all diffusion properties (P values from multi-testing $<$ 0.01) over time were observed in all lobar parcellations for both WM and GM.  Similar changing patterns in FA, MD, AD and RD were present in WM and GM ( Fig. \ref{fig:YearlyFAMDADRD}), while changes in WM were in greater scale compared to GM.
+
+\begin{figure}[t!]
+\begin{minipage}[b]{0.98\linewidth}
+  \centering
+ \includegraphics[width=11.0cm]{ROI_WM_FA_MD_bar.pdf}
+\end{minipage}
+\begin{minipage}[b]{0.98\linewidth}
+  \centering
+ \includegraphics[width=11.0cm]{ROI_WM_AD_RD_bar.pdf}
+\end{minipage}
+\caption{Estimation of FA, MD, AD and RD for all the ROIs in WM at age 300, 900 and 1500 days using the linear growth model. Overall changes from 300 to 1500 days are shown as percentages.}
+\label{fig:ROIWM}
+\end{figure}
+
+\subsubsection{DTI development in WM}
+
+FA increased prominently over time in all regions as expected.  Regions that showed a particularly substantial increase include the cingulate, temporal visual, occipital lobe, and corpus callosum (Figs.  Fig. \ref{fig:YearlyFAMDADRD} and  Fig. \ref{fig:ROIWM}).  The increase was more pronounced early on (from 300 days to 900 days) and tapered off with the maturation of the brain.  At age 300 days, FA decreased from anterior to posterior regions, being highest in the prefrontal, frontal regions and lowest in the occipital region.  FA in the prefrontal, frontal, parietal and occipital lobes all reached similar values at the end of the studied age, whereas FA values in the auditory temporal lobe remained relatively low.  A higher magnitude of change occurred in the occipital lobes than the prefrontal and frontal lobes between the age of 300 days (about 1 year) to 1500 days (about 3 years).  AD values increased as RD values decreased over time in most of the regions as expected.  Regions that presented the most increase in AD were the pon and medulla regions, the cingulate and the corpus collosum. The most decrease in RD was present in corpus collosum and cingulate.  For most regions, the decrease in RD was also greater than the increase in AD, resulting in an overall decrease of the MD except for the left hemisphere of temporal limbic lobe.  Assymmetric values as well as assymmetric development in the left and right hemisphere can be observed for all diffusion properties. 
+
+\begin{figure}[t!]
+\begin{minipage}[b]{0.98\linewidth}
+  \centering
+ \includegraphics[width=11.0cm]{ROI_GM_FA_MD_bar.pdf}
+\end{minipage}
+\begin{minipage}[b]{0.98\linewidth}
+  \centering
+ \includegraphics[width=11.0cm]{ROI_GM_AD_RD_bar.pdf}
+\end{minipage}
+\caption{Estimation of FA, MD, AD and RD for all the ROIs in GM at age 300, 900 and 1500 days using the linear growth model. Overall changes from 300 to 1500 days are shown as percentages.  The same scales were used for MD, AD and RD to aid comparison with WM. }
+\label{fig:ROIGM}
+\end{figure}
+
+\subsubsection{DTI development in GM}
+
+FA values in the GM were notably lower than in the WM, as expected.  Most regions showed a significant increase in FA overall, except for the cingulate cortex and the right hemisphere of the prefrontal region (Figs.  Fig. \ref{fig:YearlyFAMDADRD} and  Fig. \ref{fig:ROIGM}).  Both hemispheres of the prefrontal region presented a decrease in FA from 300 days to 900 days, and a slight increase from 900 days to 1500 days. Occipital regions and the cerebellum showed the most increase in FA among all parcellation lobes. Changes of AD in GM were marginal in most of the regions.  Of the 20 regions analyzed, 11 showed increases and 9 showed decreases in AD.  RD decreased slightly for most of the regions except for the temporal limbic region and occipital lobes bilaterally.  MD showed the same pattern of change as RD.  
+
+\begin{figure}[tbp]
+\begin{minipage}[b]{0.96\linewidth}
+  \centering
+ \includegraphics[width=10.0cm]{WMGMCorr.pdf}
+\end{minipage}
+\caption{Correlations of diffusion property changes between WM and GM.  Corresponding regions in left and right hemispheres showed highly similar correlation values and p values.  Regions that showed a significant p value ($<$$5\%$) are indicated with $*$.  Note that correlations were impossible for regions characterized by only WM or GM ( e.g. CC, PM and IL), shown in black.}
+\label{fig:WMGMCorr}
+\end{figure}
+ 
+Furthermore, we investigated whether DTI development in WM and GM were correlated. Observed changes of FA, MD and RD demonstrated strong correlation between WM and GM  (Fig. \ref{fig:WMGMCorr}), while change of AD showed little correlation between WM and GM.  
+
+\subsection{Voxel-wise Analysis (VBA)}
+Voxels with significant development over time (p-value $<$ $5\%$) were highlighted using MARM( Fig. \ref{fig:VBAw_Tracts}).  Connected-components of small size were rejected to reduce false positives.  A CSF mask was also  applied to exclude CSF and skull regions.  Overall, 44.84\% of the brain volume (CSF excluded) showed significant changes in FA, while  24.85\%, 29.64\% and 33.01\% for MD, AD, and RD respectively.  In order to assess consistency across analysis methods, we overlaid the  VBA-based results with those from the tract-based approach.   In general we observed that those regions demonstrating significant change in the VBA-based results also showed a similarly significant change in the tract-based approach, though we observed several regions of significant change in the tract based approach without correlating significant change in the VBA. This is not surprising, as VBA methods in general suffer from limited sensitivity. 
+
+\begin{figure}[tbp]
+\begin{minipage}[b]{0.96\linewidth}
+  \centering
+ \includegraphics[width=13.0cm]{VBAw_Tracts.pdf}
+\end{minipage}
+\caption{Voxels with p value $<$$0.05$ from VBA are highlighted (as red voxels) in the 3D slices.  P values from fiber tract analysis are overlayed for comparison.  Arrows point to illustrative regions where significant changes were found consistently with both analyses.}
+\label{fig:VBAw_Tracts}
+\end{figure}
+
+
+
+\subsection{Fiber tract}
+
+\begin{table}[btp]
+\footnotesize
+\centering
+\begin{center}
+\begin{tabular}{  c || c | c | c | c }
+    Tract Name &    FA    &  MD  &  AD  &  RD \\ 
+    Genu & ** & * & NS & **\\ 
+    ILF L & ** & * & ** & **\\
+    ILF R & ** & * & ** & **\\
+    Cingulum L & ** & ** & ** & **\\
+    Cingulum R & ** & ** & ** & **\\
+    IntCap Thalamus-Anterior L & ** & * & ** & **\\
+    IntCap Thalamus-Anterior R & ** & NS & ** & **\\
+    IntCap Thalamus-Parietal L & ** & ** & ** & **\\
+    IntCap Thalamus-Parietal R & ** & ** & ** & **\\
+    IntCap Pons- Anterior L & ** & NS & * & NS\\
+    IntCap Pons-Anterior R & ** & ** & ** & **\\
+    IntCap Pons-Parietal L & ** & NS & NS & NS\\
+    IntCap Pons-Parietal R & ** & ** & ** & **\\
+    Splenium & ** & ** & ** & **\\
+    \end{tabular}
+\end{center}
+\caption{Global p values of changes in diffusion properties along different fiber tracts. P values smaller than $0.01$ are indicated by ** and P values greater than $0.01$, but smaller than $0.05$ are noted by $*$.  NS represents non significant changes.  Left and right hemispheres are designated using L and R. Internal capsule fibers (IntCap) include subdivisions connecting the thalamus to the anterior and parietal regions and pons to the anterior and parietal regions.  ILF is the inferior longitudinal fasciculus.}
+\label{table:Tract_glop}
+\end{table}
+
+\begin{figure}[tbp]
+\begin{minipage}[b]{0.96\linewidth}
+  \centering
+ \includegraphics[width=12.0cm]{Tracts_Pval.pdf}
+\end{minipage}
+\caption{P values mapped along fiber tracts.  Colormap was chosen to highlight regions with significant changes over time (p value$<$$0.05$). } 
+\label{fig:Tracts_Pval}
+\end{figure}
+
+A global (cumulative) P value for each fiber tract was generated after FRATS was applied(Table \ref{table:Tract_glop}).  Most of the fiber tracts show significant changes over time for all diffusion properties.  FA presents significant changes in all the fiber tracts included in this study (genu, cingulum, inferior longitudinal fasciculus and internal capsule in the left and right hemisphere and splenium).  Tracts that showed global significant changes in all diffusion properties are cingulum,  thalamic radiation to the prefrontal region, from pons to the right parietal region and the splenium.  Asymmetry in DTI development was observed in different tracts.  MD and RD in the genu show significant changes over time, while the change in AD was insignificant.  
+
+\begin{figure}[tbp]
+\begin{minipage}[b]{0.95\linewidth}
+  \centering
+ \includegraphics[width=11.0cm]{yearlytract.pdf}
+\end{minipage}
+\caption{Diffusion properties along the fiber tract were estimated using the developmental model at 300, 900 and 1500 days.}
+\label{fig:yearlydti}
+\end{figure}
+Fig. \ref{fig:yearlydti} demonstrated FA increase over time in all tracts.  Splenium, compared to the genu showed increase in FA and decrease in RD earlier in time, i.e. mostly between 1-3 years compared to 3-5 years.  AD showed increase in all tracts while RD showed decrease.  RD decrease in the splenium was minimal compared to the internal capsual tracts and the genu.  MD in the splenium and internal capsuals all showed increase contrast to the decrease shown in genu.  
+
+\section{Discussion}
+\label{sec:conclusion_discussion}
+This paper presented a DTI-based study of normal development in non-human primates from late pediatric to adolescent period for the first time to our knowledge.  It investigated the great potential of DTI properties as valuable alternative descriptors for brain development.  This is very much needed as DTI is becoming a more and more commonly used imaging modality in neurodevelopment studies.  It provided indispensable information to establish normal development trajectories for rhesus monkeys, which is most valuable as a standard in studying disease models of non-human primates  as well as for comparison with human development.  DTI properties, including FA, MD, AD and RD during this period were examined for WM using three complimentary approaches, i.e. ROI, voxelwise and tract-based methods.  Those properties are also exploited for their implications in GM development.  
+
+Overall, all the DTI properties show significant changes in both WM and GM over time, demonstrating DTI properties as an important indicator for neural development.  In WM, we observed increase in FA and AD contrast to decrease in MD and RD in most brain regions and tracts.  These changes are more prominent early on (1-3 yrs) and taper off over time.  Regions showing the most increase of FA in the ROI-analysis include the cingulate, temporal visual, occipital lobe and the corpus collosum.  The fiber tracts that run through these regions, i.e. the genu, splenium (they connect to the corpus collosum) and the segment of internal capsual tracts that connect to the temporal regions reflect significant increase in FA in the tract-based anslysis.  Most of these regions overlap with the results from the voxel wise analysis as well (Fig. \ref{fig:VBAw_Tracts}).  Rather than FA, which is commonly used as an index for WM development, we also studied the changes in MD, AD and RD.  AD decreased in the anterior regions (prefrontal, frontal cingulate) and increased in the posterior regions over the whole length of this study.  RD decreased in all regions and along all fiber tracts from ROI analysis and tract-based analysis.  Decrease of RD was more profound in the Splenium between 1-3 yrs compared to the genu where most of the changes occurred between 3-5 years.  Similarly, we observed more changes of RD at younger ages (1-3 years) in the occipital lobe compared to the frontal/prefrontal lobe.  The lobes with highest diffusivity change are expected to be late maturing lobes and likely experience major development during the time of the study.  Both the cerebellum and the temporal limbic lobe show very little change over time in the diffusion properties, indicating that they have most likely gone through their substantial WM development before the studied age. 
+
+In WM, FA has been commonly used to index the myelination process (\fxnote{Morriss MC, neuroradiology 1999,concepts of myeline and myelination in neuroradiology}  ) of the WM while we believe the causes of FA changes are a complicated mechanism that could involve myelination, cell-packing, fiber diameter, etc.  We believe that FA is sensitive to detect the microstructure change occurring in the brain, as it is associated with changes in both parallel and perpendicular diffusion.  However, it lacks the ability to pinpoint what process is causing the change exactly.  In order to provide a more detailed picture of the micro structure changes, we included all the four mostly used diffusion property measurements, i.e. FA, MD, AD and RD.  AD describes parallel diffusion, i.e. diffusion along the fiber bundles , which has been reported to associate with local organization of the tissue, including cell density, water content, intra- and extra- cellular water ratio, etc.  \fxnote{reference} RD demonstrates the change of perpendicular diffusivity and has been shown to link closely to myelination of the axons \citep{Zhang_JNeurosci_2009}, as the myelin sheath is the major contributor for restrictive diffusion.  Changes in both parallel and perpendicular diffusivity naturally lead to change in FA and MD.
+
+Diffusion properties of GM were also included in the ROI-based analysis.  Studies that focus on the change of diffusion properties in GM during development are very limited and the causes are still unclear to us.  While GM maturation is a very complicated process, we hypothesize that the major causes of diffusion property changes come from the pruning process of dendritic connections, development of the cortical parallel fiber and myelination of the WM fiber tracts that originate from or arrive at these GM structures.  In this study, we observed overall increase of FA in GM except for the cingulate and prefrontal regions.  These reflected the increase or slight decrease in AD paired with decrease in RD in most of the regions.  Decrease in RD was mostly caused by myelination of WM fibers that start or end in the GM tissues while increase in AD mostly likely reflected pruning process which made the GM tissue more organized.  
+
+Furthermore, we observed a delay of GM maturation compared to WM.  As shown in Fig \ref{fig:YearlyFAMDADRD}, most of the diffusion property changes occurred between 1-3 years in WM as compared to 3-5 years in GM.  These findings are consistent with the human studies for comparable age range(late postnatal to adolescent) \ref{\fxnote{microstructural maturation of the human brain from childhood to adulthood C. lebel}}.  Overall, analysis of FA, MD, AD and RD together revealed that myelination process was the main driven force in all diffusion property changes during this time.  As a result,  RD decreased in both WM and GM and led to increase in FA and decrease in MD.  
+
+As observed in similar human studies (\fxnote{buchel etal, 2004, gong et al, 2005}), we also observed small asymmetry from both ROI (WM and GM) and tract-based analysis.  This was not surprising considering the left and right hemisphere of the brain are usually different functionally and could mature at different times.  Gender differences have been reported in several studies for both human \fxnote{reference} and non-human primates.  However, we did not observe any significant difference between the two gender groups, and in the final analysis, gender effect was not considered in the statistical modeling.  The insignificant findings could be due to the limited number of subjects in our study and more subjects will be needed for a study focusing on gender effect.  Although we did not include gender effect in our modeling, the subjects in our study are balanced (14 males and 11 females) and we strongly believe that the general developmental patterns described here are applicable to both genders.
+
+Brain maturation is a long process that spans from infancy to adulthood.  While we observed significant brain development from late postnatal to adolescent period as indexed by changes in diffusion properties, we are planning to include more neonate data in the future as so much is changing during infancy for the brain.  The subjects in this study range from about 1 year to 6 years and provided great in formation on how brain matures during this time.  However, the data wasn't acquired longitudinally and in the future work, a longitudinal data-set with a longitudinal 4D atlas will hopefully provide more insights. 
+
+\section{Conclusion}
+This study presents for the first time the normative development trajectory of primates from late postnatal to adolescent with DTI.  Changes of different diffusion properties were investigated as important markers in brain maturation.  Our results showed overall increase of FA in most regions of both WM and GM and major decrease in RD.  This indicated that myelination of WM fiber tracts played a great role as a driven force for all the observed changes.  
+
+\section{Bibliography}
+\bibliographystyle{elsarticle-harv}
+\bibliography{MonkeyDevREF}
+\end{document}
